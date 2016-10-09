@@ -6,7 +6,7 @@ The tutorial code is still work in progress! However, workshop attendees can sti
 
 ## Preparation Instructions for JCConf2016 Attendees
 
-The project contains a relatively large-sized sample streaming dataset (at `src/main/resources/nycTaxiRides.gz`), and scripts to download some required binaries for the tutorial environment. So, you may want to download these before the workshop.
+The project contains a relatively large-sized sample streaming dataset (at `dataset/nycTaxiRides.gz`), and scripts to download some required binaries for the tutorial environment. So, you may want to download these before the workshop.
 
 First, clone the project:
 
