@@ -24,7 +24,7 @@ import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
-import tw.flink.jcconf2016.streaming.taxipractice.answer.TaxiRidePopularPlacesAnswer;
+import tw.flink.jcconf2016.streaming.taxipractice.answer.TaxiRideTravelTimePredictionAnswer;
 import tw.flink.jcconf2016.streaming.taxipractice.datamodel.TaxiRide;
 import tw.flink.jcconf2016.streaming.taxipractice.source.CheckpointedTaxiRideSource;
 import tw.flink.jcconf2016.streaming.taxipractice.util.GeoUtils;
@@ -32,7 +32,7 @@ import tw.flink.jcconf2016.streaming.taxipractice.util.TravelTimePredictionModel
 
 /**
  * ------------------------------------------------------------------------
- * 		         EXERCISE #4: Taxi Ride Travel Time Prediction
+ *                   EXERCISE #4: Taxi Ride Travel Time Prediction
  * ------------------------------------------------------------------------
  *
  * INSTRUCTIONS:
@@ -54,7 +54,7 @@ import tw.flink.jcconf2016.streaming.taxipractice.util.TravelTimePredictionModel
  * 		nycTaxiRidesPath - absolute path to the nycTaxiRides.gz file
  *
  * REFERENCE ANSWER:
- * 		{@link TaxiRidePopularPlacesAnswer}
+ * 		{@link TaxiRideTravelTimePredictionAnswer}
  */
 public class TaxiRideTravelTimePrediction {
 
@@ -71,8 +71,8 @@ public class TaxiRideTravelTimePrediction {
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 		// ===============================================================================
-		//		1. we want to persist our incrementally trained model, even on failure,
-		//		   so you must enable checkpointing! (set to a 5 second interval)
+		//   1. we want to persist our incrementally trained model, even on failure,
+		//      so you must enable checkpointing! (set to a 5 second interval)
 		// ===============================================================================
 
 		// start the data generator
@@ -87,8 +87,8 @@ public class TaxiRideTravelTimePrediction {
 				// organize stream by destination
 				.keyBy(0)
 				// ===============================================================================
-				//		2. the PredictionModel flatMap function is not implemented yet;
-				//		   finish its implementation down below!
+				//   2. the PredictionModel flatMap function is not implemented yet;
+				//      finish its implementation down below!
 				// ===============================================================================
 				.flatMap(new PredictionModel());
 
@@ -135,11 +135,11 @@ public class TaxiRideTravelTimePrediction {
 		public void flatMap(Tuple2<Integer, TaxiRide> val, Collector<Tuple2<Long, Integer>> out) throws Exception {
 
 			// ===============================================================================
-			//		3. When you get an "end" event, call
-			//         TravelTimePredictionModel#refineModel(int direction, double distance, double travelTime)}
- 			// 		   to refine the model. When you get a "start" event, call
-			//         TravelTimePredictionModel#predictTravelTime(int direction, double distance)}
- 			// 		   to predict the travel time for the ride and output the prediction.
+			//   3. When you get an "end" event, call
+			//      TravelTimePredictionModel#refineModel(int direction, double distance, double travelTime)}
+ 			//      to refine the model. When you get a "start" event, call
+			//      TravelTimePredictionModel#predictTravelTime(int direction, double distance)}
+ 			//      to predict the travel time for the ride and output the prediction.
 			// ===============================================================================
 
 		}
@@ -148,9 +148,9 @@ public class TaxiRideTravelTimePrediction {
 		public void open(Configuration config) {
 
 			// ===============================================================================
-			//		4. When this operator is initialized, you should register and initialize
-			// 		   modelState to be checkpointed by supplying a value state descriptor
-			//		   to the state backend (through the runtimeContext)
+			//   4. When this operator is initialized, you should register and initialize
+			//      modelState to be checkpointed by supplying a value state descriptor
+			//      to the state backend (through the runtimeContext)
 			// ===============================================================================
 
 		}

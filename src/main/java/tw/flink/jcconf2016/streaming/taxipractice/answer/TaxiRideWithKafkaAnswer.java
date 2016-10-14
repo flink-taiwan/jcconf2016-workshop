@@ -60,7 +60,7 @@ public class TaxiRideWithKafkaAnswer {
 		String nycTaxiRidesPath = params.getRequired("nycTaxiRidesPath");
 
 		// -------------------------------------------------------------------------------
-		//		Clean the ride events and write them to Kafka (topic: CLEANSED_RIDES_TOPIC)
+		//   Clean the ride events and write them to Kafka (topic: CLEANSED_RIDES_TOPIC)
 		// -------------------------------------------------------------------------------
 
 		// set up streaming execution environment
@@ -68,7 +68,7 @@ public class TaxiRideWithKafkaAnswer {
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 		// ===============================================================================
-		//		1. remember to set the auto watermark interval in the environment config
+		//   1. remember to set the auto watermark interval in the environment config
 		// ===============================================================================
 		env.getConfig().setAutoWatermarkInterval(1000);
 
@@ -81,8 +81,8 @@ public class TaxiRideWithKafkaAnswer {
 				.filter(new NYCFilter());
 
 		// ===============================================================================
-		//		2. write the cleansed events to the Kafka topic CLEANSED_RIDES_TOPIC;
-		//		   the Kafka server location is at LOCAL_KAFKA_BROKER
+		//   2. write the cleansed events to the Kafka topic CLEANSED_RIDES_TOPIC;
+		//      the Kafka server location is at LOCAL_KAFKA_BROKER
 		// ===============================================================================
 		filteredRides.addSink(new FlinkKafkaProducer09<>(
 				LOCAL_KAFKA_BROKER,
@@ -90,7 +90,7 @@ public class TaxiRideWithKafkaAnswer {
 				new TaxiRideSchema()));
 
 		// -------------------------------------------------------------------------------
-		//		Consume the cleansed ride events from Kafka and calculate popular places
+		//   Consume the cleansed ride events from Kafka and calculate popular places
 		// -------------------------------------------------------------------------------
 
 		// configure the Kafka consumer
@@ -101,12 +101,12 @@ public class TaxiRideWithKafkaAnswer {
 		kafkaProps.setProperty("auto.offset.reset", "earliest");
 
 		// ===============================================================================
-		//		3. replace "env.fromElements(new TaxiRide())" with a FlinkKafkaConsumer09
-		//         that reads from the topic CLEANSED_RIDES_TOPIC.
-		//		4. remember to assign watermarks to the events read from Kafka by calling
-		//		   "assignTimestampsAndWatermarks". The events will at most be out-of-order
-		//		   by MAX_EVENT_DELAY, so you can simply use a default
-		//		   BoundedOutOfOrdernessTimestampExtractor for this.
+		//   3. replace "env.fromElements(new TaxiRide())" with a FlinkKafkaConsumer09
+		//      that reads from the topic CLEANSED_RIDES_TOPIC.
+		//   4. remember to assign watermarks to the events read from Kafka by calling
+		//      "assignTimestampsAndWatermarks". The events will at most be out-of-order
+		//      by MAX_EVENT_DELAY, so you can simply use a default
+		//      BoundedOutOfOrdernessTimestampExtractor for this.
 		// ===============================================================================
 		FlinkKafkaConsumer09<TaxiRide> consumer = new FlinkKafkaConsumer09<>(
 				CLEANSED_RIDES_TOPIC,

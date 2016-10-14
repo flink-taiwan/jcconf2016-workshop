@@ -29,7 +29,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer09;
 import org.apache.flink.util.Collector;
-import tw.flink.jcconf2016.streaming.taxipractice.answer.TaxiRidePopularPlacesAnswer;
+import tw.flink.jcconf2016.streaming.taxipractice.answer.TaxiRideWithKafkaAnswer;
 import tw.flink.jcconf2016.streaming.taxipractice.datamodel.TaxiRide;
 import tw.flink.jcconf2016.streaming.taxipractice.datamodel.TaxiRideSchema;
 import tw.flink.jcconf2016.streaming.taxipractice.source.TaxiRideSource;
@@ -39,7 +39,7 @@ import java.util.Properties;
 
 /**
  * ------------------------------------------------------------------------
- * 		            EXERCISE #3: Taxi Ride With Kafka
+ *                   EXERCISE #3: Taxi Ride With Kafka
  * ------------------------------------------------------------------------
  *
  * INSTRUCTIONS:
@@ -64,7 +64,7 @@ import java.util.Properties;
  * 		nycTaxiRidesPath - absolute path to the nycTaxiRides.gz file
  *
  * REFERENCE ANSWER:
- * 		{@link TaxiRidePopularPlacesAnswer}
+ * 		{@link TaxiRideWithKafkaAnswer}
  */
 public class TaxiRideWithKafka {
 
@@ -83,7 +83,7 @@ public class TaxiRideWithKafka {
 		String nycTaxiRidesPath = params.getRequired("nycTaxiRidesPath");
 
 		// -------------------------------------------------------------------------------
-		//		Clean the ride events and write them to Kafka (topic: CLEANSED_RIDES_TOPIC)
+		//   Clean the ride events and write them to Kafka (topic: CLEANSED_RIDES_TOPIC)
 		// -------------------------------------------------------------------------------
 
 		// set up streaming execution environment
@@ -91,7 +91,7 @@ public class TaxiRideWithKafka {
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 		// ===============================================================================
-		//		1. remember to set the auto watermark interval in the environment config
+		//   1. remember to set the auto watermark interval in the environment config
 		// ===============================================================================
 
 		// start the data generator
@@ -103,12 +103,12 @@ public class TaxiRideWithKafka {
 				.filter(new NYCFilter());
 
 		// ===============================================================================
-		//		2. write the cleansed events to the Kafka topic CLEANSED_RIDES_TOPIC;
-		//		   the Kafka server location is at LOCAL_KAFKA_BROKER
+		//   2. write the cleansed events to the Kafka topic CLEANSED_RIDES_TOPIC;
+		//      the Kafka server location is at LOCAL_KAFKA_BROKER
 		// ===============================================================================
 
 		// -------------------------------------------------------------------------------
-		//		Consume the cleansed ride events from Kafka and calculate popular places
+		//   Consume the cleansed ride events from Kafka and calculate popular places
 		// -------------------------------------------------------------------------------
 
 		// configure the Kafka consumer
@@ -119,12 +119,12 @@ public class TaxiRideWithKafka {
 		kafkaProps.setProperty("auto.offset.reset", "earliest");
 
 		// ===============================================================================
-		//		3. replace "env.fromElements(new TaxiRide())" with a FlinkKafkaConsumer09
-		//         that reads from the topic CLEANSED_RIDES_TOPIC.
-		//		4. remember to assign watermarks to the events read from Kafka by calling
-		//		   "assignTimestampsAndWatermarks". The events will at most be out-of-order
-		//		   by MAX_EVENT_DELAY, so you can simply use a default
-		//		   BoundedOutOfOrdernessTimestampExtractor for this.
+		//   3. replace "env.fromElements(new TaxiRide())" with a FlinkKafkaConsumer09
+		//      that reads from the topic CLEANSED_RIDES_TOPIC.
+		//   4. remember to assign watermarks to the events read from Kafka by calling
+		//      "assignTimestampsAndWatermarks". The events will at most be out-of-order
+		//      by MAX_EVENT_DELAY, so you can simply use a default
+		//      BoundedOutOfOrdernessTimestampExtractor for this.
 		// ===============================================================================
 
 		// create a TaxiRide data stream

@@ -23,7 +23,7 @@ import tw.flink.jcconf2016.streaming.taxipractice.util.GeoUtils;
 
 /**
  * ------------------------------------------------------------------------
- * 		             EXERCISE #1: Taxi Ride Cleansing
+ *                   EXERCISE #1: Taxi Ride Cleansing
  * ------------------------------------------------------------------------
  *
  * INSTRUCTIONS:
@@ -59,9 +59,9 @@ public class TaxiRideCleansing {
 				new TaxiRideSource(nycTaxiRidesPath, maxEventDelay, servingSpeedFactor));
 
 		// ===============================================================================
-		//		1. clean up `rides`, so that the output stream only contains events
-		//		   with valid geo coordinates within NYC.
-		//		2. print out the result stream to console
+		//   1. clean up `rides`, so that the output stream only contains events
+		//      with valid geo coordinates within NYC.
+		//   2. print out the result stream to console
 		// ===============================================================================
 
 		// run the cleansing pipeline

@@ -24,7 +24,7 @@ import tw.flink.jcconf2016.streaming.taxipractice.util.GeoUtils;
 
 /**
  * ------------------------------------------------------------------------
- * 		            EXERCISE #2: Taxi Ride Popular Places
+ *                   EXERCISE #2: Taxi Ride Popular Places
  * ------------------------------------------------------------------------
  *
  * INSTRUCTIONS:
@@ -62,7 +62,7 @@ public class TaxiRidePopularPlaces {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
 		// ===============================================================================
-		//		1. remember to set this job to use "Event Time"
+		//   1. remember to set this job to use "Event Time"
 		// ===============================================================================
 
 		// start the data generator
@@ -70,16 +70,16 @@ public class TaxiRidePopularPlaces {
 				new TaxiRideSource(nycTaxiRidesPath, MAX_EVENT_DELAY, SERVING_SPEED_FACTOR));
 
 		// ===============================================================================
-		//		2. again, filter ride events to contain only valid geo coordinates
-		//		3. map each ride event to a tuple 2 pair: (grid cell id, the event)
-		//		4. partition the stream by the grid cell id
-		//		5. aggregate the number of ride events (start and end) in each grid cell
-		//		   over a sliding window (span 15 minutes, slide 1 minute), and output:
-		//		   (cellId, time, eventCount)
-		//		6. filter out window outputs if the number of ride events is
-		// 		   lower than POPULAR_THRESHOLD.
-		//		7. map the grid cell back to geo coordinates, and print as format:
-		//		   (lon, lat, time, eventCount)
+		//   2. again, filter ride events to contain only valid geo coordinates
+		//   3. map each ride event to a tuple 2 pair: (grid cell id, the event)
+		//   4. partition the stream by the grid cell id
+		//   5. aggregate the number of ride events (start and end) in each grid cell
+		//      over a sliding window (span 15 minutes, slide 1 minute), and output:
+		//      (cellId, time, eventCount)
+		//   6. filter out window outputs if the number of ride events is
+		//      lower than POPULAR_THRESHOLD.
+		//   7. map the grid cell back to geo coordinates, and print as format:
+		//      (lon, lat, time, eventCount)
 		// ===============================================================================
 
 		// execute the transformation pipeline

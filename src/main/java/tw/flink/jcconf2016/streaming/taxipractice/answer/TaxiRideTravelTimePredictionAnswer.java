@@ -47,8 +47,8 @@ public class TaxiRideTravelTimePredictionAnswer {
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
 		// ===============================================================================
-		//		1. we want to persist our incrementally trained model, even on failure,
-		//		   so you must enable checkpointing! (set to a 5 second interval)
+		//   1. we want to persist our incrementally trained model, even on failure,
+		//      so you must enable checkpointing! (set to a 5 second interval)
 		// ===============================================================================
 		env.enableCheckpointing(5000);
 
@@ -64,8 +64,8 @@ public class TaxiRideTravelTimePredictionAnswer {
 				// organize stream by destination
 				.keyBy(0)
 				// ===============================================================================
-				//		2. the PredictionModel flatMap function is not implemented yet;
-				//		   finish its implementation down below!
+				//   2. the PredictionModel flatMap function is not implemented yet;
+				//      finish its implementation down below!
 				// ===============================================================================
 				.flatMap(new PredictionModel());
 
@@ -111,11 +111,11 @@ public class TaxiRideTravelTimePredictionAnswer {
 		public void flatMap(Tuple2<Integer, TaxiRide> val, Collector<Tuple2<Long, Integer>> out) throws Exception {
 
 			// ===============================================================================
-			//		3. When you get an "end" event, call
-			//         TravelTimePredictionModel#refineModel(int direction, double distance, double travelTime)}
-			// 		   to refine the model. When you get a "start" event, call
-			//         TravelTimePredictionModel#predictTravelTime(int direction, double distance)}
-			// 		   to predict the travel time for the ride and output the prediction.
+			//   3. When you get an "end" event, call
+			//      TravelTimePredictionModel#refineModel(int direction, double distance, double travelTime)}
+			//      to refine the model. When you get a "start" event, call
+			//      TravelTimePredictionModel#predictTravelTime(int direction, double distance)}
+			//      to predict the travel time for the ride and output the prediction.
 			// ===============================================================================
 
 			// fetch operator state
@@ -146,9 +146,9 @@ public class TaxiRideTravelTimePredictionAnswer {
 		public void open(Configuration config) {
 
 			// ===============================================================================
-			//		4. When this operator is initialized, you should register and initialize
-			// 		   modelState to be checkpointed by supplying a value state descriptor
-			//		   to the state backend (through the runtimeContext)
+			//   4. When this operator is initialized, you should register and initialize
+			//      modelState to be checkpointed by supplying a value state descriptor
+			//      to the state backend (through the runtimeContext)
 			// ===============================================================================
 
 			// obtain key-value state for prediction model

@@ -44,9 +44,9 @@ public class TaxiRideCleansingAnswer {
 				new TaxiRideSource(nycTaxiRidesPath, maxEventDelay, servingSpeedFactor));
 
 		// ===============================================================================
-		//		1. clean up `rides`, so that the output stream only contains events
-		//		   with valid geo coordinates within NYC.
-		//		2. print out the result stream to console
+		//   1. clean up `rides`, so that the output stream only contains events
+		//      with valid geo coordinates within NYC.
+		//   2. print out the result stream to console
 		// ===============================================================================
 		DataStream<TaxiRide> filteredRides = rides
 				// filter out rides that do not start or stop in NYC
