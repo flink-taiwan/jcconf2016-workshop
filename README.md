@@ -39,6 +39,23 @@ Attendees for the workshop are recommended to prepare the following before the e
      ```bash
      jcconf@jcconf2016-flink:~$ ls
      env-deploy.sh flink jcconf2016-workshop kafka
+
+     jcconf@jcconf2016-flink:~$ ./env-deploy.sh
+     * Deploy Apache Flink cluster
+       setting up password-less ssh to localhost ...
+       starting JobManager & TaskManager ...
+     * Deploy Apache Kafka
+       starting Zookeeper & Kafka broker ...
+       creating 'cleansedRides' topic ...
+       creating 'sawtoothWaves' topic ...
+     * Deploy InfluxDB & Grafana
+
+     jcconf@jcconf2016-flink:~$ jps
+     625 TaskManager
+     629 QuorumPeerMain
+     358 JobManager
+     631 Kafka
+     877 Jps
      ```
 
 # Disclaimer
