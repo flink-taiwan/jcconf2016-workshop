@@ -23,7 +23,7 @@ import tw.flink.jcconf2016.streaming.sinewave.source.SawtoothSource;
 public class ProduceSawtoothToKafka {
 
 	private static final String KAFKA_BROKER_SERVER = "localhost:9092";
-	private static final String SAWTOOTH_TOPIC = "sawtoothWave";
+	private static final String SAWTOOTH_TOPIC = "sawtoothWaves";
 
 	public static void main(String[] args) throws Exception {
 

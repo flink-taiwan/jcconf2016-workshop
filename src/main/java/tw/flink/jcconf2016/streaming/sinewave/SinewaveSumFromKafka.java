@@ -32,7 +32,7 @@ import java.util.Properties;
 public class SinewaveSumFromKafka {
 
 	private static final String KAFKA_BROKER_SERVER = "localhost:9092";
-	private static final String SAWTOOTH_TOPIC = "sawtoothWave";
+	private static final String SAWTOOTH_TOPIC = "sawtoothWaves";
 
 	private static final String SINEWAVE_SUM_GROUP = "sinewaveSumGroup";
 
@@ -52,20 +52,19 @@ public class SinewaveSumFromKafka {
 		props.setProperty("auto.commit.enable", "false");
 
 		DataStream<UnkeyedDataPoint> originalSawTooth = env.addSource(
-				new FlinkKafkaConsumer09<>(SAWTOOTH_TOPIC, new UnKeyedDataPointSchema(), props));
+				new FlinkKafkaConsumer09<>(SAWTOOTH_TOPIC, new UnKeyedDataPointSchema(), props))
+				.assignTimestampsAndWatermarks(new AssignerWithPunctuatedWatermarks<UnkeyedDataPoint>() {
+					@Nullable
+					@Override
+					public Watermark checkAndGetNextWatermark(UnkeyedDataPoint unkeyedDataPoint, long l) {
+						return new Watermark(l);
+					}
 
-		originalSawTooth.assignTimestampsAndWatermarks(new AssignerWithPunctuatedWatermarks<UnkeyedDataPoint>() {
-			@Nullable
-			@Override
-			public Watermark checkAndGetNextWatermark(UnkeyedDataPoint unkeyedDataPoint, long l) {
-				return new Watermark(l);
-			}
-
-			@Override
-			public long extractTimestamp(UnkeyedDataPoint unkeyedDataPoint, long l) {
-				return unkeyedDataPoint.timestampMillis;
-			}
-		});
+					@Override
+					public long extractTimestamp(UnkeyedDataPoint unkeyedDataPoint, long l) {
+						return unkeyedDataPoint.timestampMillis;
+					}
+				});
 
 		// attach key to the generated sawtooth
 		DataStream<KeyedDataPoint> sawtoothKeyed = originalSawTooth
