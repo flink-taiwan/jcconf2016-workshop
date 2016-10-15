@@ -56,7 +56,8 @@ RUN wget http://apache.stu.edu.tw/kafka/0.9.0.1/kafka_2.11-0.9.0.1.tgz && \
 
 # set up env vars for Java and Maven paths
 RUN echo "export JAVA_HOME=/usr/lib/jvm/java-8-oracle" >> .bashrc && \
-    echo "export PATH=/opt/apache-maven-3.0.5/bin:$PATH" >> .bashrc
+    echo "export PATH=/opt/apache-maven-3.0.5/bin:$PATH" >> .bashrc && \
+    source .bashrc
 
 # will be using the workshop git repo to mirror code changes
 RUN git clone https://github.com/flink-taiwan/jcconf2016-workshop.git && \
