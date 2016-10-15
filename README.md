@@ -26,7 +26,10 @@ Attendees for the workshop are recommended to prepare the following before the e
      
      ```bash
     docker run -it --rm -h jcconf2016-flink \
-               -p 8081:8081 -p 3000:3000 \ # 8081 for Flink JobManager Web UI, 3000 for Grafana Web UI
+               -p 8081:8081 \ # 8081 for Flink JobManager Web UI
+               -p 9092:9092 \ # 9092 for Kafka broker server
+               -p 3000:3000 \ # 3000 for Grafana Web UI
+               -p 8086:8086 \ # 8086 for InfluxDB server
                flinktw/jcconf2016-workshop bash
      ```
      
