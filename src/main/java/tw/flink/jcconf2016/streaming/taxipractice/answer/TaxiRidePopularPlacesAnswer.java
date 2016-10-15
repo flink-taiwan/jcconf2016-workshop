@@ -134,7 +134,7 @@ public class TaxiRidePopularPlacesAnswer {
 				Iterable<Tuple2<Integer, TaxiRide>> values,
 				Collector<Tuple3<Integer, Long, Integer>> out) throws Exception {
 
-			int cellId = ((Tuple2<Integer, TaxiRide>)key).f0;
+			int cellId = ((Tuple1<Integer>)key).f0;
 			long windowTime = window.getEnd();
 
 			int cnt = 0;

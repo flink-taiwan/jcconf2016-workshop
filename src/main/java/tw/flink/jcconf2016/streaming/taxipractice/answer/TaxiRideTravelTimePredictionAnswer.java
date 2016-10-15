@@ -115,7 +115,8 @@ public class TaxiRideTravelTimePredictionAnswer {
 			//      TravelTimePredictionModel#refineModel(int direction, double distance, double travelTime)}
 			//      to refine the model. When you get a "start" event, call
 			//      TravelTimePredictionModel#predictTravelTime(int direction, double distance)}
-			//      to predict the travel time for the ride and output the prediction.
+			//      to predict the travel time for the ride and output the prediction. The prediction
+			//		output should be (rideId, predictedTravelTime)
 			// ===============================================================================
 
 			// fetch operator state
