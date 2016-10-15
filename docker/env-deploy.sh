@@ -27,8 +27,11 @@ bin/zookeeper-server-start.sh config/zookeeper.properties > /dev/null &
 bin/kafka-server-start.sh config/server.properties > /dev/null &
 sleep 5 # sleep a bit to make sure the Kafka processes complete startup before creating topoics
 
-echo -e "${LIGHT_GREEN}  creating 'test' topic ...${NC}"
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test > /dev/null
+echo -e "${LIGHT_GREEN}  creating 'cleansedRides' topic ...${NC}"
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic cleansedRides > /dev/null
+
+echo -e "${LIGHT_GREEN}  creating 'sawtoothWaves' topic ...${NC}"
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic sawtoothWaves > /dev/null
 
 echo -e "${GREEN}* Deploy InfluxDB & Grafana${NC}"
 sudo service influxdb start > /dev/null
