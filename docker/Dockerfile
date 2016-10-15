@@ -15,11 +15,10 @@ RUN apt-get -y install git vim apt-transport-https curl adduser libfontconfig op
 RUN useradd -m -s /bin/bash jcconf
 RUN echo "jcconf ALL= NOPASSWD: ALL" >> /etc/sudoers
 
-# install InfluxDB 1.0.0 using official deb packages
-RUN curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add - && \
-    echo "deb https://repos.influxdata.com/ubuntu trusty stable" | sudo tee /etc/apt/sources.list.d/influxdb.list && \
-    apt-get update && \
-    apt-get -y install influxdb
+# install InfluxDB 0.12
+RUN wget https://s3.amazonaws.com/influxdb/influxdb_0.12.1-1_amd64.deb && \
+    dpkg -i ./influxdb_0.12.1-1_amd64.deb && \
+    rm influxdb_0.12.1-1_amd64.deb
 
 # install Grafana 3.1.1
 RUN wget http://grafanarel.s3.amazonaws.com/builds/grafana_3.1.1-1470047149_amd64.deb && \
